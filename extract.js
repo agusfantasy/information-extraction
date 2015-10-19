@@ -1,9 +1,9 @@
 function setTag(element, type){
     var text = $('textarea#text').val();
 
-	var selection = $('#selected').val();
+	var selection = $('#selected-extra').val();
 
-    var re = new RegExp(selection ,"g");
+    var re = new RegExp(selection ,"gi");
 
     var openTag = '<'+element+' TYPE="'+type+'">',
 		closeTag = '</'+element+'>';
@@ -11,10 +11,11 @@ function setTag(element, type){
     $('textarea#text').val(text.replace(re, openTag+selection+closeTag));
 	
 	$('.popover').hide();
-	$('#selected').val('');
+	$('#selected-extra').val('');
 }
 
 $(document).ready(function(){
+	$('body').append('<input type="hidden" id="selected-extra">');
 
 	$('#transform').click(function(){
 		$('#text').html($('textarea#input').val());
@@ -45,8 +46,6 @@ $(document).ready(function(){
     			popClass = 'right';
     		}
 
-			var selection = window.getSelection().toString(); 
-
 			$('.popover').css({
 	    		'position': 'absolute',
 	    		'left': left + 'px',
@@ -59,7 +58,8 @@ $(document).ready(function(){
 	    		$('.popover').removeClass('bottom').addClass('right');
 	    	}
 
-			$('#selected').val(selection.trim());
+			var selection = window.getSelection().toString(); 
+			$('#selected-extra').val(selection.trim());
 
 			if (selection.length > 1) {
 				$('.popover').show(function(){			
@@ -69,8 +69,11 @@ $(document).ready(function(){
 			
     	});	
 
+	}).keyup(function(e){
+		var selection = window.getSelection();
+		$('#selected-extra').val(selection.toString());	
 	});
-	
+
 
 	$('.btn-select-bottom .btn').each(function(){
 		$(this).click(function(){
