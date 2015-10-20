@@ -1,0 +1,36 @@
+.input{
+	width:80%; 
+	height:150px; 
+	border: 1px solid #000000;
+}
+
+.location{
+	background: rgba(0,255,0,0.2)
+}
+
+.organization{
+	background: rgba(0,0,255,0.2);
+}
+
+.person{
+	background: rgba(255,0,0,0.2)
+}
+
+.date{
+	background: rgba(243,228,53,0.5);
+}
+
+.time{
+	background: rgba(243,228,53,0.3);
+}
+
+iframe{
+	width: 80%;
+	height: 400px;
+	cursor: crosshair;
+}
+
+.editor-container{
+	width:70%; 
+	height:300px;
+}
