@@ -1,5 +1,3 @@
-# information-extraction
-
 Information Extraction Tools for NLP
 =======================
 Tools for information extraction based on Message Understanding Conferences 6 (MUC-6).
