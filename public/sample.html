@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="asset/style.css">
+</head>
+	
+<body>
+	<div class="container">
+
+		<h1>Information Extraction Tools</h1>
+
+		<ul>
+			<li>Copy and paste content to textarea</li>
+			<li>Select text to set entity tag</li>
+			<li>After selected text automatically show popover</li>  
+			<li>Click one of the type</li>
+			<li>You can set entity by click button or set by keyboard shortcut</li>
+		</ul>
+		
+
+		<form>
+			<textarea class="input" id="input"></textarea>
+			<br>
+			<div class="btn btn-primary" id="transform">  Process text </div>
+			<br><br>
+			<div id="editor-container"></div>	
+		</form>
+
+    </div>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="lib/shortcut.js"></script>
+	<script src="jquery.select.extraction.js"></script>
+	<script>
+		$(function(){
+			$("#transform").click(function(){
+				$("#editor-container").extraction({
+					content: $('textarea#input').val(),
+					data : [
+						{'element': 'ENAMEX', 'type': 'PERSON', 'text': 'Surya Paloh'},
+						{'element': 'ENAMEX', 'type': 'ORGANIZATION', 'text': 'KPK'}
+					]
+				});
+			});
+		})
+	</script>
+	
+</body>
+</html>
