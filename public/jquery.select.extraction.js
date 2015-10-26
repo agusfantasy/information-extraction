@@ -83,13 +83,18 @@
 			<body></body>\
 			</html>\
 		</iframe>';
+	var style = '.location{background: rgba(0,255,0,0.2)}\
+				.organization{background: rgba(0,0,255,0.2);}\
+				.person{background: rgba(255,0,0,0.2)}\
+				.date{background: rgba(243,228,53,0.5);}\
+				.time{background: rgba(243,228,53,0.3);}';
 
 	//append to head in iframe editor
 	var head = '<meta charset="utf-8">\
 				<meta http-equiv="X-UA-Compatible" content="IE=edge">\
 				<meta name="viewport" content="width=device-width, initial-scale=1">\
 				<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">\
-				<link type="text/css" rel="stylesheet" href="asset/style.css">';
+				<style>'+style+'</style>'
 
 	/** 
 	* Set Tag after selection or get data from exisiting
