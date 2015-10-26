@@ -76,11 +76,11 @@
 			</div>\
 		</div><br>\
 		<p> Ctrl+P = Person, Ctrl+O = Organization, Ctrl+L = Location, Ctrl+D = Date, Ctrl+T = Time </p>\
-		<iframe src="" id="extraction-editor" scrolling="no" style="overflow:hidden;" allowTransparency="true" style="visibility:hidden;" onload="this.style.visibility=visible;">\
-			<html>\
+		<iframe style="width:100%; margin: 0%; padding: 5px; height: 20em; border: 1px solid silver;" src="" id="extraction-editor">\
+			<html style="height:100%">\
 			<head>\
 			</head>\
-			<body></body>\
+			<body style="height:100%"></body>\
 			</html>\
 		</iframe>';
 	var style = '.location{background: rgba(0,255,0,0.2)}\
