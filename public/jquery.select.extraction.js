@@ -77,12 +77,8 @@
 		</div><br>\
 		<p> Ctrl+P = Person, Ctrl+O = Organization, Ctrl+L = Location, Ctrl+D = Date, Ctrl+T = Time </p>\
 		<iframe style="width:100%; margin: 0%; padding: 5px; height: 20em; border: 1px solid silver;" src="" id="extraction-editor">\
-			<html style="height:100%">\
-			<head>\
-			</head>\
-			<body style="height:100%"></body>\
-			</html>\
 		</iframe>';
+
 	var style = '.location{background: rgba(0,255,0,0.2)}\
 				.organization{background: rgba(0,0,255,0.2);}\
 				.person{background: rgba(255,0,0,0.2)}\
@@ -107,16 +103,22 @@
 	function setTag(selection, element, type){
 
 		if (selection.toString().length > 0) {
-		    var re = new RegExp(selection.toString().trim() ,"gi");
+			var str = selection.toString().trim();
+			
+			var re; 
+			if(str.match(/\(/g) || str.match(/\\/g) || str.match(/\)/g) ){
+				re = new RegExp("\\(.*\\)", "gi");  
+			} else {
+				re = new RegExp(str, "gi");
+			}
 
 		    var openTag = '<span class="'+type.toLowerCase()+'"> ' + setIcon(type.toLowerCase()) + ' <'+element+' TYPE="'+type+'">',
 				closeTag = '</'+element+'></span>';
 
-			var iframeBody = $('iframe#extraction-editor').contents().find('body');	
+			var iframeBody = $('iframe#extraction-editor').contents().find('body');
 			var text = iframeBody.html();
 
-		    iframeBody.html(text.replace(re, openTag+selection+closeTag));
-
+		    iframeBody.html(text.replace(re, openTag+selection+closeTag));	
 		} else {
 			alert('Please select text !');
 		}
@@ -150,14 +152,22 @@
         this.html(html);
 
         var elem = $(this);
-        var iframe = elem.find('iframe').contents();
 
-        iframe.find('head').html(head);
+		var iframe = document.getElementById('extraction-editor');
 
-        var iframeBody = iframe.find('body')
-        iframe.find('body').html(opts.content);
+		var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
-		var iframeWindow = document.getElementById('extraction-editor').contentWindow;
+		//iframeDoc.head.write(head);
+		//var iframeDocBody = iframeDoc.body;
+		//iframeDoc.head.write(head);
+		var headBody = '<html style="height:100%">\
+			<head>' + head + '</head>\
+			<body style="height:100%">' + opts.content + '</body>\
+			</html>';
+		iframeDoc.write(headBody);
+		iframeDoc.close();
+
+		var iframeWindow = iframe.contentWindow;
 		
 		//Add shortCut Keyboard
 		shortCutInit(iframeWindow, elem);
@@ -168,7 +178,7 @@
 		}
 
 		//click button after selection text
-        elem.find('.btn-select-tag .btn').each(function(){
+	    elem.find('.btn-select-tag .btn').each(function(){
 			$(this).click(function(){
 				setTag(iframeWindow.getSelection(), $(this).data('element'),  $(this).attr('id'));
 			});
