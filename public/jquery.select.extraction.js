@@ -180,7 +180,7 @@
     //Default options Plugin
     $.fn.extraction.defaults = {
     	content: "Please provide text!",
-    	existingEntity: []
+    	data: []
 	};
  
 }( jQuery ));
