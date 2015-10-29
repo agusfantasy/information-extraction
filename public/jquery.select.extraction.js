@@ -107,18 +107,19 @@
 			
 			var re; 
 			if(str.match(/\(/g) || str.match(/\\/g) || str.match(/\)/g) ){
-				re = new RegExp("\\(.*\\)", "gi");  
+				re = str;
 			} else {
 				re = new RegExp(str, "gi");
 			}
 
+			console.log(re);
 		    var openTag = '<span class="'+type.toLowerCase()+'"> ' + setIcon(type.toLowerCase()) + ' <'+element+' TYPE="'+type+'">',
 				closeTag = '</'+element+'></span>';
 
 			var iframeBody = $('iframe#extraction-editor').contents().find('body');
 			var text = iframeBody.html();
 
-		    iframeBody.html(text.replace(re, openTag+selection+closeTag));	
+		    iframeBody.html(text.replace(re, openTag+str+closeTag));	
 		} else {
 			alert('Please select text !');
 		}
@@ -157,9 +158,6 @@
 
 		var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
 
-		//iframeDoc.head.write(head);
-		//var iframeDocBody = iframeDoc.body;
-		//iframeDoc.head.write(head);
 		var headBody = '<html style="height:100%">\
 			<head>' + head + '</head>\
 			<body style="height:100%">' + opts.content + '</body>\
